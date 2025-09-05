@@ -7,7 +7,7 @@ namespace ManagerProperties.Application.UseCases.Owners.Commands.CreateOwner
         public required string Name { get; set; }
         public required string Address { get; set; }
         public required string Photo { get; set; }
-        public required string Birthday { get; set; }
+        public required DateTime Birthday { get; set; }
 
     }
 }

@@ -1,5 +1,4 @@
 ﻿using ManageProperties.Domain.Entities;
-using ManageProperties.Domain.ValueObjects;
 using ManagerProperties.Application.Contracts.Persists;
 using ManagerProperties.Application.Contracts.Repositories;
 using ManagerProperties.Application.Utilities.Mediator;
@@ -19,8 +18,8 @@ namespace ManagerProperties.Application.UseCases.Owners.Commands.CreateOwner
 
         public async Task<Guid> Handle(CommandCreateOwner commandCreate)
         {
-            var address = new Address(commandCreate.Address);
-            var owner = new Owner(commandCreate.Name, address, commandCreate.Photo, commandCreate.Birthday);
+            var owner = new Owner(commandCreate.Name, commandCreate.Address, 
+                commandCreate.Photo, commandCreate.Birthday);
 
             try
             {   

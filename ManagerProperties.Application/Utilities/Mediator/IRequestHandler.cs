@@ -5,4 +5,10 @@
     {
         Task<TResponse> Handle(TRequest request); 
     }
+
+    public interface IRequestHandler<TRequest>
+        where TRequest : IRequest
+    {
+        Task Handle(TRequest request);
+    }
 }

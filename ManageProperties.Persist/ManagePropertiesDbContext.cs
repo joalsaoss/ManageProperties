@@ -20,7 +20,8 @@ namespace ManageProperties.Persist
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(ManagePropertiesDbContext).Assembly);
         }
         public DbSet<Owner> Owners { get; set; }
+        public DbSet<Property> Properties { get; set; }
 
 
-    }
+        }
 }

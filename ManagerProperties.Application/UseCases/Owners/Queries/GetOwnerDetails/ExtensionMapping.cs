@@ -10,7 +10,7 @@ namespace ManagerProperties.Application.UseCases.Owners.Queries.GetOwnerDetails
             {
                 Id = owner.Id,
                 Name = owner.Name,
-                Address = owner.Address.value,
+                Address = owner.Address,
                 Photo = owner.Photo,
                 Birthday = owner.Birthday.ToString()
             };

@@ -38,7 +38,7 @@ namespace ManageProperties.Tests.Application.UseCases.Owners
                 Name = name,
                 Address = address.value,
                 Photo = photo,
-                Birthday = birthday
+                Birthday = DateTime.Parse(birthday)
             };
 
             // Si fuera record posicional, usa:
@@ -49,9 +49,9 @@ namespace ManageProperties.Tests.Application.UseCases.Owners
         public async Task Handle_Create_Owner_And_Persist()
         {
             var command = new CommandCreateOwner { Address = "Address", Name = "Nombre Owner", 
-                Photo = "Photo", Birthday = "2000-07-23" };
+                Photo = "Photo", Birthday = DateTime.Parse("2000-07-23") };
 
-            var ownerCreated = new Owner("Nombre Owner", new Address("Address"), "Photo", "2000-07-23");
+            var ownerCreated = new Owner("Nombre Owner", "Address", "Photo", DateTime.Parse("2000-07-23"));
 
             _repo.Create(Arg.Any<Owner>()).Returns(ownerCreated);
             var result = await _sut.Handle(command);

@@ -1,0 +1,39 @@
+@ManageProperties.API_HostAddress = http://localhost:5080/api/propertyimage
+
+GET {{ManageProperties.API_HostAddress}}/01991aad-328e-7956-ad6c-1ef10a8bdbfe  
+Accept: application/json
+
+###
+
+GET {{ManageProperties.API_HostAddress}}   
+Accept: application/json
+
+###
+
+POST {{ManageProperties.API_HostAddress}}
+Content-Type: application/json
+
+{
+    "PropertyId": "01991828-7b40-76d2-b9d2-bb54a52f1c69",
+    "Image": "image_02.png",
+    "Enable": "1"
+}
+
+###
+
+PUT {{ManageProperties.API_HostAddress}}/01991828-7b40-76d2-b9d2-bb54a52f1c69
+Content-Type: application/json
+
+{
+    "OwnerId": "0199162e-8e7e-7dba-8def-cce2a1c11a73",
+    "CodeInternal": "1000005",
+    "Name": "Property Two Updated - New",
+    "Address": "Calle 99-9 av 7-77",
+    "Price": 200000,
+    "Year": 2025
+}
+
+###
+
+DELETE {{ManageProperties.API_HostAddress}}/019917c0-aef5-7bd1-8deb-5e2a5096db71
+Accept: application/json

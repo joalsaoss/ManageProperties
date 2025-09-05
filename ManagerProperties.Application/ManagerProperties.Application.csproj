@@ -7,16 +7,22 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="UseCases\Owners\Commands\DeleteOwner\" />
-    <Folder Include="UseCases\Owners\Commands\UpdateOwner\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="12.0.0" />
+    <PackageReference Include="Scrutor" Version="6.1.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\ManageProperties.Domain\ManageProperties.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="UseCases\PropertyImages\Commands\DeletePropertyImage\" />
+    <Folder Include="UseCases\PropertyImages\Commands\UpdatePropertyImage\" />
+    <Folder Include="UseCases\PropertyTraces\Commands\CreatePropertyTrace\" />
+    <Folder Include="UseCases\PropertyTraces\Commands\DeletePropertyTrace\" />
+    <Folder Include="UseCases\PropertyTraces\Commands\UpdatePropertyTrace\" />
+    <Folder Include="UseCases\PropertyTraces\Queries\GetAllPropertyTraces\" />
+    <Folder Include="UseCases\PropertyTraces\Queries\GetPropertyTraceDetail\" />
   </ItemGroup>
 
 </Project>

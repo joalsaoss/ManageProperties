@@ -13,10 +13,12 @@ namespace ManageProperties.Domain.Common.Parser
             if (string.IsNullOrWhiteSpace(date))
                 throw new BusinessRulesExceptions($"La fecha es obligatoria");
 
-            if (!DateOnly.TryParseExact(date, "yyyy-MM-dd", CultureInfo.InvariantCulture,
+            var format = "dd/MM/yyyy";
+
+            if (!DateOnly.TryParseExact(date, format, CultureInfo.InvariantCulture,
                                         DateTimeStyles.None, out var parsed))
             {
-                throw new BusinessRulesExceptions($"La fecha debe tener formato yyyy-MM-dd");
+                throw new BusinessRulesExceptions($"La fecha debe tener formato {format} - {date}");
             }
 
             return parsed;

@@ -48,8 +48,8 @@ namespace ManageProperties.Tests.Domain.Entities
                 Assert.That(img.Id, Is.Not.EqualTo(Guid.Empty));
                 Assert.That(GetGuidVersion(img.Id), Is.EqualTo(7), "Se esperaba GUID versión 7.");
 
-                Assert.That(img.IdProperty, Is.EqualTo(idProp));
-                Assert.That(img.File, Is.EqualTo(file));
+                Assert.That(img.PropertyId, Is.EqualTo(idProp));
+                Assert.That(img.Image, Is.EqualTo(file));
                 Assert.That(img.Enable, Is.EqualTo(enable));
 
                 Assert.That(img.Property, Is.Null); // navegación no seteada en ctor
