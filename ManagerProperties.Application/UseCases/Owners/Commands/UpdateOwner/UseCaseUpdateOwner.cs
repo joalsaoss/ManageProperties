@@ -18,6 +18,7 @@ namespace ManagerProperties.Application.UseCases.Owners.Commands.UpdateOwner
         public async Task Handle(CommandUpdateOwner request)
         {
             var owner = await repository.GetById(request.id);
+            
             if (owner is null)
                 throw new NFoundException(); 
 

@@ -30,9 +30,9 @@ Content-Type: application/json
 {
     "OwnerId": "0199162e-8e7e-7dba-8def-cce2a1c11a73",
     "CodeInternal": "1000005",
-    "Name": "Property Two Updated - New",
+    "Name": "Property Two Updated",
     "Address": "Calle 99-9 av 7-77",
-    "Price": 200000,
+    "Price": 210000,
     "Year": 2025
 }
 

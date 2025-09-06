@@ -1,7 +1,9 @@
 ﻿using ManageProperties.API.DTOs.PropertyImages;
 using ManagerProperties.Application.UseCases.PropertyImages.Commands.CreatePropertyImage;
+using ManagerProperties.Application.UseCases.PropertyImages.Commands.UpdatePropertyImage;
 using ManagerProperties.Application.UseCases.PropertyImages.Queries.GetAllPropertyImage;
 using ManagerProperties.Application.UseCases.PropertyImages.Queries.GetPropertyImageDetail;
+using ManagerProperties.Application.UseCases.PropertyTraces.Commands.DeletePropertyTrace;
 using ManagerProperties.Application.Utilities.Mediator;
 using Microsoft.AspNetCore.Mvc;
 
@@ -44,6 +46,29 @@ namespace ManageProperties.API.Controllers
                 Image = createPropertyImageDTO.Image,
                 Enable = createPropertyImageDTO.Enable
             };
+            await mediator.Send(command);
+            return Ok();
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Put(Guid id, UpdatePropertyImageDTO updatePropertyImageDTO)
+        {
+            var command = new CommandUpdatePropertyImage
+            {
+                Id = id,
+                PropertyId = updatePropertyImageDTO.PropertyId,
+                Image = updatePropertyImageDTO.Image,
+                Enable = updatePropertyImageDTO.Enable
+            };
+
+            await mediator.Send(command);
+            return Ok();
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(Guid id)
+        {
+            var command = new CommandDeletePropertyTrace { Id = id };
             await mediator.Send(command);
             return Ok();
         }

@@ -19,6 +19,7 @@ namespace ManageProperties.Domain.Entities
         {
             ApplyBusinessRulesCodeInternal(codeInternal);
             ApplyBusinessRulesName(name);
+            ApplyBusinessRulesName(address);
             ApplyBusinessRulesPrice(price);
             ApplyBusinessRulesYear(year);
 
@@ -32,12 +33,23 @@ namespace ManageProperties.Domain.Entities
             Year = year;
         }
 
-        public void UpdateOwnerId(Guid ownerId)
+        public void Update(Guid ownerId, string codeInternal, string name, string address, decimal price, int year)
         {
+            ApplyBusinessRulesName(codeInternal);
+            ApplyBusinessRulesName(name);
+            ApplyBusinessRulesName(address);
+            ApplyBusinessRulesPrice(price);
+            ApplyBusinessRulesYear(year);
+
             OwnerId = ownerId;
+            CodeInternal = codeInternal;
+            Name = name.NormalizeWhitespaceAndPunctuation();
+            Address = address;
+            Price = price;
+            Year = year;
         }
 
-        public void UpdateCodeInternal(string codeInternal)
+        private void UpdateCodeInternal(string codeInternal)
         {
             ApplyBusinessRulesCodeInternal(codeInternal);
             CodeInternal = codeInternal;
@@ -51,24 +63,12 @@ namespace ManageProperties.Domain.Entities
             }
         }
 
-        public void UpdateName(string name)
-        {
-            ApplyBusinessRulesName(name);
-            Name = name;
-        }
-
         private void ApplyBusinessRulesName(string name)
         {
             if (string.IsNullOrWhiteSpace(name))
             {
                 throw new BusinessRulesExceptions($"El nombre es obligatorio");
             }
-        }
-
-        public void UpdatePrice(decimal price)
-        {
-            ApplyBusinessRulesPrice(price);
-            Price = price;
         }
 
         private void ApplyBusinessRulesPrice(decimal price)
@@ -79,12 +79,6 @@ namespace ManageProperties.Domain.Entities
             }
         }
 
-        public void UpdateYear(int year)
-        {
-            ApplyBusinessRulesYear(year);
-            Year = year;
-        }
-
         private void ApplyBusinessRulesYear(int year)
         {
             if (int.IsNegative(year))
@@ -92,6 +86,5 @@ namespace ManageProperties.Domain.Entities
                 throw new BusinessRulesExceptions($"El año debe ser mayor o igual que cero");
             }
         }
-
     }
 }

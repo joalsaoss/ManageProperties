@@ -27,5 +27,21 @@ namespace ManageProperties.Domain.Entities
             Image = image;
             Enable = enable;
         }
+
+        public void Update(Guid propertyId, string image, string enable)
+        {
+            ApplyBusinessRuleProperty(image);
+            ApplyBusinessRuleProperty(enable);
+
+            PropertyId = propertyId;
+            Image = image;
+            Enable = enable;
+        }
+
+        private void ApplyBusinessRuleProperty(string porperty)
+        {
+            if (string.IsNullOrWhiteSpace(porperty))
+                throw new BusinessRulesExceptions($"El {nameof(porperty)} es obligatorio");
+        }
     }
 }

@@ -3,33 +3,30 @@ using ManagerProperties.Application.Contracts.Repositories;
 using ManagerProperties.Application.Exceptions;
 using ManagerProperties.Application.Utilities.Mediator;
 
-namespace ManagerProperties.Application.UseCases.Properties.Commands.UpdateProperty
+namespace ManagerProperties.Application.UseCases.PropertyTraces.Commands.DeletePropertyTrace
 {
-    public class UseCaseUpdateProperty : IRequestHandler<CommandUpdateProperty>
+    public class UseCaseDeletePropertyTrace : IRequestHandler<CommandDeletePropertyTrace>
     {
-        private readonly IRepositoryProperties repository;
+        private readonly IRepositoryPropertyTraces repository;
         private readonly IUnitOfWork unitOfWork;
 
-        public UseCaseUpdateProperty(IRepositoryProperties repository, IUnitOfWork unitOfWork)
+        public UseCaseDeletePropertyTrace(IRepositoryPropertyTraces repository, IUnitOfWork unitOfWork)
         {
             this.repository = repository;
             this.unitOfWork = unitOfWork;
         }
-        public async Task Handle(CommandUpdateProperty request)
+        public async Task Handle(CommandDeletePropertyTrace request)
         {
-            var property = await repository.GetById(request.Id);
+            var propertyTrace = await repository.GetById(request.Id);
 
-            if (property is null)
+            if (propertyTrace is null)
             {
                 throw new NFoundException();
             }
 
-            property.Update(request.OwnerId, request.CodeInternal,
-                request.Name, request.Address, request.Price, request.Year);
-
             try
             {
-                await repository.Update(property);
+                await repository.Delete(propertyTrace);
                 await unitOfWork.Persist();
             }
             catch (Exception)
@@ -37,9 +34,6 @@ namespace ManagerProperties.Application.UseCases.Properties.Commands.UpdatePrope
                 await unitOfWork.RollBack();
                 throw;
             }
-
         }
-
-
     }
 }

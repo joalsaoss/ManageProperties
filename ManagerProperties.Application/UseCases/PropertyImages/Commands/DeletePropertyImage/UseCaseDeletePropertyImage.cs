@@ -3,33 +3,30 @@ using ManagerProperties.Application.Contracts.Repositories;
 using ManagerProperties.Application.Exceptions;
 using ManagerProperties.Application.Utilities.Mediator;
 
-namespace ManagerProperties.Application.UseCases.Properties.Commands.UpdateProperty
+namespace ManagerProperties.Application.UseCases.PropertyImages.Commands.DeletePropertyImage
 {
-    public class UseCaseUpdateProperty : IRequestHandler<CommandUpdateProperty>
+    public class UseCaseDeletePropertyImage : IRequestHandler<CommandDeletePropertyImage>
     {
-        private readonly IRepositoryProperties repository;
+        private readonly IRepositoryPropertyImages repository;
         private readonly IUnitOfWork unitOfWork;
 
-        public UseCaseUpdateProperty(IRepositoryProperties repository, IUnitOfWork unitOfWork)
+        public UseCaseDeletePropertyImage(IRepositoryPropertyImages repository, IUnitOfWork unitOfWork)
         {
             this.repository = repository;
             this.unitOfWork = unitOfWork;
         }
-        public async Task Handle(CommandUpdateProperty request)
+        public async Task Handle(CommandDeletePropertyImage request)
         {
-            var property = await repository.GetById(request.Id);
-
-            if (property is null)
+            var propertyImage = await repository.GetById(request.Id);
+            
+            if (propertyImage is null)
             {
                 throw new NFoundException();
             }
 
-            property.Update(request.OwnerId, request.CodeInternal,
-                request.Name, request.Address, request.Price, request.Year);
-
             try
             {
-                await repository.Update(property);
+                await repository.Delete(propertyImage);
                 await unitOfWork.Persist();
             }
             catch (Exception)
@@ -37,9 +34,6 @@ namespace ManagerProperties.Application.UseCases.Properties.Commands.UpdatePrope
                 await unitOfWork.RollBack();
                 throw;
             }
-
         }
-
-
     }
 }

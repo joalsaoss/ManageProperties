@@ -1,0 +1,40 @@
+@ManageProperties.API_HostAddress = http://localhost:5080/api/propertytrace
+
+GET {{ManageProperties.API_HostAddress}}/01991c6c-1880-783b-8a0a-3c31dbc7c7fa  
+Accept: application/json
+
+###
+
+GET {{ManageProperties.API_HostAddress}}   
+Accept: application/json
+
+###
+
+POST {{ManageProperties.API_HostAddress}}
+Content-Type: application/json
+
+{
+    "PropertyId": "01991828-7b40-76d2-b9d2-bb54a52f1c69",
+    "DateSale" : "2025-06-21",
+    "Name" : "Property trace tres",
+    "Value" : 1000,
+    "Tax" : 0.19
+}
+
+###
+
+PUT {{ManageProperties.API_HostAddress}}/01991c6c-1880-783b-8a0a-3c31dbc7c7fa
+Content-Type: application/json
+
+{
+    "PropertyId": "01991828-7b40-76d2-b9d2-bb54a52f1c69",
+    "DateSale" : "2025-06-21",
+    "Name" : "Property trace tres - Update 2",
+    "Value" : 10000,
+    "Tax" : 0.21
+}
+
+###
+
+DELETE {{ManageProperties.API_HostAddress}}/01991c7b-9c28-7409-93a7-a015fe5a1f89
+Accept: application/json
