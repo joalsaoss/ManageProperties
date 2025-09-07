@@ -20,10 +20,14 @@ namespace ManagerProperties.Application.UseCases.Owners.Commands.UpdateOwner
             var owner = await repository.GetById(request.id);
             
             if (owner is null)
-                throw new NFoundException(); 
+                throw new NFoundException();
 
-            owner.Update(request.Name, request.Address, 
-                request.Photo, DateTime.Parse(request.Birthday));
+            CancellationToken ct = default;
+            var ms = new MemoryStream();
+            await request.Bytes.CopyToAsync(ms, ct);
+
+            owner.Update(request.Name, request.Address,
+                ms.ToArray(), request.Birthday);
 
             try
             {

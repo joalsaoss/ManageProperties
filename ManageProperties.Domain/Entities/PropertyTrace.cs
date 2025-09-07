@@ -1,5 +1,4 @@
 ﻿using ManageProperties.Domain.Common.Extensions;
-using ManageProperties.Domain.Common.Parser;
 using ManageProperties.Domain.Exceptions;
 
 namespace ManageProperties.Domain.Entities

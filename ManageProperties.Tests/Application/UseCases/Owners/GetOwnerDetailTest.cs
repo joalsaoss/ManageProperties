@@ -24,7 +24,7 @@ namespace ManageProperties.Tests.Application.UseCases.Owners
         public async Task Handle_Create_Owner_And_Persist()
         {
             //var address = new Address("Address")
-            var owner = new Owner("Nombre Owner", "Address", "Photo",DateTime.Parse("2000-07-23"));
+            var owner = new Owner("Nombre Owner", "Address", [],DateTime.Parse("2000-07-23"));
             var id = owner.Id;
             var query = new GetOwnerDetail { Id = id };
 

@@ -18,7 +18,7 @@ var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 
-//app.UseManagerExceptionsMiddleware();
+app.UseManagerExceptionsMiddleware();
 
 if (app.Environment.IsDevelopment())
 {

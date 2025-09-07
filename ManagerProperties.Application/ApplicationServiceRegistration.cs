@@ -19,20 +19,6 @@ namespace ManagerProperties.Application
                 .AsImplementedInterfaces()
                 .WithScopedLifetime());
 
-            /*
-            services.AddScoped<IRequestHandler<CommandCreateOwner, Guid>, 
-                UseCaseCreateOwner>();
-            services.AddScoped<IRequestHandler<GetOwnerDetail, OwnerDetailDTO>,
-                UseCaseGetOwnerDetail>();
-            services.AddScoped<IRequestHandler<GetAllOwners, List<GetAllOwnersDTO>>,
-                UseCaseGetAllOwner>();
-            services.AddScoped<IRequestHandler<CommandUpdateOwner>, UseCaseUpdateOwner>();
-            services.AddScoped<IRequestHandler<CommandDeleteOwner>, UseCaseDeleteOwner>();
-
-            services.AddScoped<IRequestHandler<CommandCreateProperty, Guid>,
-                UseCaseCreateProperty>();
-            */
-
             return services;
         }
     }

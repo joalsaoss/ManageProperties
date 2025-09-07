@@ -39,7 +39,5 @@ namespace ManagerProperties.Application.UseCases.Properties.Commands.UpdatePrope
             }
 
         }
-
-
     }
 }

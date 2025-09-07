@@ -6,7 +6,9 @@ namespace ManagerProperties.Application.UseCases.PropertyImages.Commands.UpdateP
     {
         public required Guid Id { get; set; }
         public required Guid PropertyId { get; set; }
-        public required string Image { get; set; }
+        public required string PhotoFileName { get; set; }
+        public required Stream Bytes { get; set; }
+        public required string ContentType { get; set; }
         public required string Enable { get; set; }
     }
 }

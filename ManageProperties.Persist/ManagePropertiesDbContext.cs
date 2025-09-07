@@ -21,7 +21,8 @@ namespace ManageProperties.Persist
         }
         public DbSet<Owner> Owners { get; set; }
         public DbSet<Property> Properties { get; set; }
-
-
-        }
+        public DbSet<PropertyImage> PropertyImages { get; set; }
+        public DbSet<PropertyTrace> PropertyTraces { get; set; }
+        
+    }
 }

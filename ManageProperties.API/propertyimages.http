@@ -1,6 +1,6 @@
 @ManageProperties.API_HostAddress = http://localhost:5080/api/propertyimage
 
-GET {{ManageProperties.API_HostAddress}}/01991aad-328e-7956-ad6c-1ef10a8bdbfe  
+GET {{ManageProperties.API_HostAddress}}/019924c1-536b-7ec1-a62d-30ccfa4a85f4  
 Accept: application/json
 
 ###

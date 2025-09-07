@@ -8,17 +8,25 @@ namespace ManageProperties.Domain.Entities
         public Guid Id { get; private set; }
         public string Name { get; private set; } = null!;
         public string Address { get; private set; } = null!;
-        public string Photo { get; private set; } = null!;
-        public DateTime Birthday { get; private set; }  // <- ahora es DateOnly
+        public byte[] Photo { get; private set; } = null!;
+        public DateTime Birthday { get; private set; }
 
-        public Owner(string name, string address, string photo, DateTime birthday)
+        public Owner(string name, string address, DateTime birthday)
         {
-            ApplyBusinessRuleProperty(name);
-            ApplyBusinessRuleProperty(address);
-            ApplyBusinessRuleProperty(photo);
+            ApplyBusinessRuleOwnerString(name);
+            ApplyBusinessRuleOwnerString(address);
 
-            //DateOfBirthGuard.ValidateOrThrow(birthday);
+            Id = Guid.CreateVersion7();
+            Name = name.NormalizePersonName();
+            Address = address;
+            Birthday = birthday;
+        }
 
+        public Owner(string name, string address, byte[] photo, DateTime birthday)
+        {
+            ApplyBusinessRuleOwnerString(name);
+            ApplyBusinessRuleOwnerString(address);
+            
             Id = Guid.CreateVersion7();
             Name = name.NormalizePersonName();
             Address = address;
@@ -26,25 +34,28 @@ namespace ManageProperties.Domain.Entities
             Birthday = birthday;
         }
 
-        public void Update(string name, string address, string photo, DateTime birthday)
+        public void Update(string name, string address, byte[] photo, DateTime birthday)
         {
-            ApplyBusinessRuleProperty(name);
-            ApplyBusinessRuleProperty(address);
-            ApplyBusinessRuleProperty(photo);
-
-            //DateOfBirthGuard.ValidateOrThrow(birthday);
-
+            ApplyBusinessRuleOwnerString(name);
+            ApplyBusinessRuleOwnerString(address);
+            
             Name = name.NormalizePersonName();
             Address = address;
             Photo = photo;
             Birthday = birthday;
         }
 
-        private void ApplyBusinessRuleProperty(string porperty)
+        public virtual void UpdateBasic(string name, string address, DateTime birthday)
+        {
+            Name = name.Trim();
+            Address = address.Trim();
+            Birthday = birthday;
+        }
+        
+        private void ApplyBusinessRuleOwnerString(string porperty)
         {
             if (string.IsNullOrWhiteSpace(porperty))
                 throw new BusinessRulesExceptions($"El {nameof(porperty)} es obligatorio");
         }
-            
     }
 }

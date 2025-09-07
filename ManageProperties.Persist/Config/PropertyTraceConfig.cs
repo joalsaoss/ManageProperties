@@ -8,6 +8,8 @@ namespace ManageProperties.Persist.Config
     {
         public void Configure(EntityTypeBuilder<PropertyTrace> builder)
         {
+            builder.ToTable("PropertyTraces");
+
             builder.Property(prop => prop.DateSale).HasMaxLength(10).IsRequired();
             builder.Property(prop => prop.Name).HasMaxLength(50).IsRequired();
             builder.Property(prop => prop.Value).HasPrecision(18, 2).IsRequired();

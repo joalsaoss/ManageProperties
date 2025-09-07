@@ -10,17 +10,22 @@ namespace ManagerProperties.Application.UseCases.Owners.Commands.CreateOwner
         private readonly IRepositoryOwners repositoryOwners;
         private readonly IUnitOfWork unitOfWork;
         
-        public UseCaseCreateOwner(IRepositoryOwners repositoryOwners, IUnitOfWork unitOfWork)
+        public UseCaseCreateOwner(IRepositoryOwners repositoryOwners, 
+            IUnitOfWork unitOfWork)
         {
-            this.repositoryOwners = repositoryOwners; 
+            this.repositoryOwners = repositoryOwners;
             this.unitOfWork = unitOfWork;
         }
 
-        public async Task<Guid> Handle(CommandCreateOwner commandCreate)
+        public async Task<Guid> Handle(CommandCreateOwner request)
         {
-            var owner = new Owner(commandCreate.Name, commandCreate.Address, 
-                commandCreate.Photo, commandCreate.Birthday);
+            CancellationToken ct = default;
+            var ms = new MemoryStream();
+            await request.Bytes.CopyToAsync(ms, ct);
 
+            var owner = new Owner(request.Name, request.Address,
+                ms.ToArray(), request.Birthday);
+    
             try
             {   
                 var response = await repositoryOwners.Create(owner);

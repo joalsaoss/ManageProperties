@@ -15,11 +15,17 @@ namespace ManagerProperties.Application.UseCases.PropertyImages.Commands.CreateP
             this.repository = repository;
             this.unitOfWork = unitOfWork;
         }
-        public async Task<Guid> Handle(CommandCreatePropertyImage commandCreatePropertyImage)
+        public async Task<Guid> Handle(CommandCreatePropertyImage request)
         {
-            var propertyImage = new PropertyImage(commandCreatePropertyImage.PropertyId, 
-                commandCreatePropertyImage.Image, 
-                commandCreatePropertyImage.Enable);
+            CancellationToken ct = default;
+            var ms = new MemoryStream();
+            await request.Bytes.CopyToAsync(ms, ct);
+
+            var ext = Path.GetExtension(request.PhotoFileName ?? "upload");
+            var key = $"owners/{request.PropertyId:D}/{DateTime.UtcNow:yyyyMMddHHmmss}_{Guid.NewGuid():N}{ext}";
+
+            var propertyImage = new PropertyImage(request.PropertyId, 
+                key, ms.ToArray(), request.ContentType, request.Enable);
 
             try
             {

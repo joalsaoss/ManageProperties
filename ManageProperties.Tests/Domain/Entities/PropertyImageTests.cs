@@ -15,7 +15,7 @@ namespace ManageProperties.Tests.Domain.Entities
         public void Ctor_debe_lanzar_cuando_file_es_nulo_o_blanco(string file)
         {
             var ex = Assert.Throws<BusinessRulesExceptions>(
-                () => new PropertyImage(SomePropertyId(), file, "ENABLED"));
+                () => new PropertyImage(SomePropertyId(), file, new byte[10], "contentType", "1"));
 
             Assert.That(ex, Is.Not.Null);
             Assert.That(ex!.Message, Is.EqualTo("El archivo es obligatorio"));
@@ -26,7 +26,7 @@ namespace ManageProperties.Tests.Domain.Entities
         public void Ctor_debe_lanzar_cuando_enable_es_nulo_o_blanco(string enable)
         {
             var ex = Assert.Throws<BusinessRulesExceptions>(
-                () => new PropertyImage(SomePropertyId(), "foto.png", enable));
+                () => new PropertyImage(SomePropertyId(), "foto.png", new byte[10], "contentType", enable));
 
             Assert.That(ex, Is.Not.Null);
             Assert.That(ex!.Message, Is.EqualTo("El estado es obligatorio"));
@@ -41,7 +41,7 @@ namespace ManageProperties.Tests.Domain.Entities
             var file = "foto_frontal.jpg";
             var enable = "ENABLED";
 
-            var img = new PropertyImage(idProp, file, enable);
+            var img = new PropertyImage(idProp, file, new byte[10], "contentType", enable);
 
             Assert.Multiple(() =>
             {
@@ -49,7 +49,6 @@ namespace ManageProperties.Tests.Domain.Entities
                 Assert.That(GetGuidVersion(img.Id), Is.EqualTo(7), "Se esperaba GUID versión 7.");
 
                 Assert.That(img.PropertyId, Is.EqualTo(idProp));
-                Assert.That(img.Image, Is.EqualTo(file));
                 Assert.That(img.Enable, Is.EqualTo(enable));
 
                 Assert.That(img.Property, Is.Null); // navegación no seteada en ctor

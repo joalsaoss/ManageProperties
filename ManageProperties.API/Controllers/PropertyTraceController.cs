@@ -37,31 +37,31 @@ namespace ManageProperties.API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post(CreatePropertyTraceDTO createPropertyTraceDTO)
+        public async Task<IActionResult> Post(CreatePropertyTraceDTO request)
         {
             var command = new CommandCreatePropertyTrace
             {
-                PropertyId = createPropertyTraceDTO.PropertyId,
-                DateSale = createPropertyTraceDTO.DateSale,
-                Name = createPropertyTraceDTO.Name,
-                Value = createPropertyTraceDTO.Value,
-                Tax = createPropertyTraceDTO.Tax
+                PropertyId = request.PropertyId,
+                DateSale = request.DateSale,
+                Name = request.Name,
+                Value = request.Value,
+                Tax = request.Tax
             };
             await mediator.Send(command);
             return Ok();
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put(Guid id, UpdatePropertyTraceDTO updatePropertyTraceDTO)
+        public async Task<IActionResult> Put(Guid id, UpdatePropertyTraceDTO request)
         {
             var command = new CommandUpdatePropertyTrace
             {
                 Id = id,
-                PropertyId = updatePropertyTraceDTO.PropertyId,
-                DateSale = updatePropertyTraceDTO.DateSale,
-                Name = updatePropertyTraceDTO.Name,
-                Value = updatePropertyTraceDTO.Value,
-                Tax = updatePropertyTraceDTO.Tax
+                PropertyId = request.PropertyId,
+                DateSale = request.DateSale,
+                Name = request.Name,
+                Value = request.Value,
+                Tax = request.Tax
             };
 
             await mediator.Send(command);

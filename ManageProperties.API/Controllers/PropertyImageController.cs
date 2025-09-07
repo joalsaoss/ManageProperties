@@ -38,27 +38,46 @@ namespace ManageProperties.API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post(CreatePropertyImageDTO createPropertyImageDTO)
+        [Consumes("multipart/form-data")]
+        [RequestSizeLimit(5_000_000)]
+        public async Task<IActionResult> Post([FromForm] CreatePropertyImageDTO request)
         {
+            Stream? photoStream = null;
+
+            if (request.CPhoto is not null && request.CPhoto.Length > 0)
+                photoStream = request.CPhoto.OpenReadStream();
+
             var command = new CommandCreatePropertyImage
             {
-                PropertyId = createPropertyImageDTO.PropertyId,
-                Image = createPropertyImageDTO.Image,
-                Enable = createPropertyImageDTO.Enable
+                PropertyId = request.PropertyId,
+                PhotoFileName = request.CPhoto.FileName,
+                Bytes = photoStream,
+                ContentType = request.CPhoto.ContentType,
+                Enable = request.Enable
             };
+
             await mediator.Send(command);
             return Ok();
         }
 
-        [HttpPut("{id}")]
-        public async Task<IActionResult> Put(Guid id, UpdatePropertyImageDTO updatePropertyImageDTO)
+        [HttpPut]
+        [Consumes("multipart/form-data")]
+        [RequestSizeLimit(5_000_000)]
+        public async Task<IActionResult> Put([FromForm] UpdatePropertyImageDTO request)
         {
+            Stream? photoStream = null;
+
+            if (request.CPhoto is not null && request.CPhoto.Length > 0)
+                photoStream = request.CPhoto.OpenReadStream();
+
             var command = new CommandUpdatePropertyImage
             {
-                Id = id,
-                PropertyId = updatePropertyImageDTO.PropertyId,
-                Image = updatePropertyImageDTO.Image,
-                Enable = updatePropertyImageDTO.Enable
+                Id = request.Id,
+                PropertyId = request.PropertyId,
+                PhotoFileName = request.CPhoto.FileName,
+                Bytes = photoStream,
+                ContentType = request.CPhoto.ContentType,
+                Enable = request.Enable
             };
 
             await mediator.Send(command);

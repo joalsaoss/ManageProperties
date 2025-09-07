@@ -49,12 +49,6 @@ namespace ManageProperties.Domain.Entities
             Year = year;
         }
 
-        private void UpdateCodeInternal(string codeInternal)
-        {
-            ApplyBusinessRulesCodeInternal(codeInternal);
-            CodeInternal = codeInternal;
-        }
-
         private void ApplyBusinessRulesCodeInternal(string codeInternal)
         {
             if (string.IsNullOrWhiteSpace(codeInternal))

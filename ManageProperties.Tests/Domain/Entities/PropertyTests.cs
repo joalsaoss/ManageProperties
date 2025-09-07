@@ -1,6 +1,5 @@
 ﻿using ManageProperties.Domain.Entities;
 using ManageProperties.Domain.Exceptions;
-using ManageProperties.Domain.ValueObjects;
 
 namespace ManageProperties.Tests.Domain.Entities
 {

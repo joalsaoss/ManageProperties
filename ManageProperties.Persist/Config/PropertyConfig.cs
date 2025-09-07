@@ -8,6 +8,8 @@ namespace ManageProperties.Persist.Config
     {
         public void Configure(EntityTypeBuilder<Property> builder)
         {
+            builder.ToTable("Properties");
+
             builder.Property(prop => prop.CodeInternal).HasMaxLength(20).IsRequired();
             builder.Property(prop => prop.Name).HasMaxLength(60).IsRequired();
             builder.Property(prop => prop.Address).HasMaxLength(100);

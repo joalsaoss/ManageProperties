@@ -4,6 +4,8 @@ namespace ManageProperties.API.DTOs.Owners
 {
     public class UpdateOwnerDTO
     {
+        public Guid id { get; set; }
+
         [Required]
         [StringLength(60)]
         public required string Name { get; set; }
@@ -12,12 +14,10 @@ namespace ManageProperties.API.DTOs.Owners
         [StringLength(100)]
         public required string Address { get; set; }
 
-        [Required]
-        [StringLength(60)]
-        public required string Photo { get; set; }
+        public required DateTime Birthday { get; set; }
 
-        [Required]
-        [StringLength(10)]
-        public required string Birthday { get; set; }
+        //Photo content
+        public required IFormFile? CPhoto { get; set; }
+
     }
 }

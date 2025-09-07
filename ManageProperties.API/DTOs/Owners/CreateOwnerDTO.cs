@@ -12,10 +12,9 @@ namespace ManageProperties.API.DTOs.Owners
         [StringLength(100)]
         public required string Address { get; set; }
 
-        [Required]
-        [StringLength(60)]
-        public required string Photo { get; set; }
-
         public required DateTime Birthday { get; set; }
+
+        //Photo content
+        public required IFormFile? CPhoto { get; set; }
     }
 }

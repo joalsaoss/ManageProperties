@@ -1,5 +1,4 @@
 ﻿using ManageProperties.Domain.Entities;
-using ManageProperties.Domain.ValueObjects;
 using ManagerProperties.Application.Contracts.Persists;
 using ManagerProperties.Application.Contracts.Repositories;
 using ManagerProperties.Application.UseCases.Owners.Commands.CreateOwner;
@@ -30,15 +29,17 @@ namespace ManageProperties.Tests.Application.UseCases.Owners
         {
             // Ajusta esta construcción según tu definición real de CommandCreateOwner
             // (si es record posicional, usa el ctor; si es clase, setea propiedades).
-            var address = new Address("Cra 123 #45-67, Medellín");
+            var address = "Cra 123 #45-67, Medellín";
 
             // Variante típica como clase con props settable:
             return new CommandCreateOwner
             {
                 Name = name,
-                Address = address.value,
-                Photo = photo,
-                Birthday = DateTime.Parse(birthday)
+                Address = address,
+                Birthday = DateTime.Parse(birthday), 
+                Bytes = Stream.Null, 
+                ContentType = "image/png", 
+                PhotoFileName= "photo.png"
             };
 
             // Si fuera record posicional, usa:
@@ -48,10 +49,16 @@ namespace ManageProperties.Tests.Application.UseCases.Owners
         [Test]
         public async Task Handle_Create_Owner_And_Persist()
         {
-            var command = new CommandCreateOwner { Address = "Address", Name = "Nombre Owner", 
-                Photo = "Photo", Birthday = DateTime.Parse("2000-07-23") };
+            var command = new CommandCreateOwner{ 
+                Address = "Address", 
+                Name = "Nombre Owner", 
+                Birthday = DateTime.Parse("2000-07-23"), 
+                Bytes = Stream.Null, 
+                ContentType = "image/png",
+                PhotoFileName = "photo.png"
+            };
 
-            var ownerCreated = new Owner("Nombre Owner", "Address", "Photo", DateTime.Parse("2000-07-23"));
+            var ownerCreated = new Owner("Nombre Owner", "Address", [], DateTime.Parse("2000-07-23"));
 
             _repo.Create(Arg.Any<Owner>()).Returns(ownerCreated);
             var result = await _sut.Handle(command);

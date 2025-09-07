@@ -37,33 +37,33 @@ namespace ManageProperties.API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post(CreatePropertiesDTO createPropertiesDTO)
+        public async Task<IActionResult> Post(CreatePropertiesDTO request)
         {
             var command = new CommandCreateProperty
             {
-                OwnerId = createPropertiesDTO.OwnerId,
-                CodeInternal = createPropertiesDTO.CodeInternal,
-                Name = createPropertiesDTO.Name,
-                Address = createPropertiesDTO.Address,
-                Price = createPropertiesDTO.Price,
-                Year = createPropertiesDTO.Year
+                OwnerId = request.OwnerId,
+                CodeInternal = request.CodeInternal,
+                Name = request.Name,
+                Address = request.Address,
+                Price = request.Price,
+                Year = request.Year
             };
             await mediator.Send(command);
             return Ok();
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put(Guid id, UpdatePropertyDTO updatePropertyDTO)
+        public async Task<IActionResult> Put(Guid id, UpdatePropertyDTO request)
         {
             var command = new CommandUpdateProperty
             {
                 Id = id,
-                OwnerId = updatePropertyDTO.OwnerId,
-                CodeInternal = updatePropertyDTO.CodeInternal,
-                Name = updatePropertyDTO.Name,
-                Address = updatePropertyDTO.Address,
-                Price = updatePropertyDTO.Price,
-                Year = updatePropertyDTO.Year
+                OwnerId = request.OwnerId,
+                CodeInternal = request.CodeInternal,
+                Name = request.Name,
+                Address = request.Address,
+                Price = request.Price,
+                Year = request.Year
             };
             await mediator.Send(command);
             return Ok();

@@ -10,7 +10,9 @@ namespace ManagerProperties.Application.UseCases.PropertyImages.Queries.GetAllPr
             {
                 Id = propertyImage.Id,
                 PropertyId = propertyImage.PropertyId,
-                Image = propertyImage.Image,
+                PhotoFileName = propertyImage.PKey,
+                Bytes = propertyImage.Bytes,
+                ContentType = propertyImage.ContentType,
                 Enable = propertyImage.Enable
             };
             return dto;

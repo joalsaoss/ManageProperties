@@ -37,28 +37,49 @@ namespace ManageProperties.API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post(CreateOwnerDTO createOwnerDTO)
+        [Consumes("multipart/form-data")]
+        [RequestSizeLimit(5_000_000)]
+        public async Task<IActionResult> Post([FromForm] CreateOwnerDTO request)
         {
+            Stream? photoStream = null;
+
+            if (request.CPhoto is not null && request.CPhoto.Length > 0)
+                photoStream = request.CPhoto.OpenReadStream();
+            
             var command = new CommandCreateOwner
             {
-                Name = createOwnerDTO.Name,
-                Address = createOwnerDTO.Address,
-                Photo = createOwnerDTO.Photo,
-                Birthday = createOwnerDTO.Birthday
+                Name = request.Name,
+                Address = request.Address,
+                Birthday = request.Birthday,
+                PhotoFileName = request.CPhoto.FileName,
+                Bytes = photoStream,
+                ContentType = request.CPhoto.ContentType,
             };
 
             await mediator.Send(command);
             return Ok();
         }
 
-        [HttpPut("{id}")]
-        public async Task<IActionResult> Put(Guid id, UpdateOwnerDTO ownerDTO)
+        [HttpPut]
+        [Consumes("multipart/form-data")]
+        [RequestSizeLimit(5_000_000)]
+        public async Task<IActionResult> Put([FromForm] UpdateOwnerDTO request)
         {
-            var command = new CommandUpdateOwner { id = id, 
-                Name = ownerDTO.Name, 
-                Address = ownerDTO.Address, 
-                Photo = ownerDTO.Photo, 
-                Birthday = ownerDTO.Birthday };
+            Stream? photoStream = null;
+
+            if (request.CPhoto is not null && request.CPhoto.Length > 0)
+                photoStream = request.CPhoto.OpenReadStream();
+
+            var command = new CommandUpdateOwner 
+            {
+                id = request.id,
+                Name = request.Name,
+                Address = request.Address,
+                Birthday = request.Birthday,
+                PhotoFileName = request.CPhoto.FileName,
+                Bytes = photoStream,
+                ContentType = request.CPhoto.ContentType,
+            };
 
             await mediator.Send(command);
             return Ok();

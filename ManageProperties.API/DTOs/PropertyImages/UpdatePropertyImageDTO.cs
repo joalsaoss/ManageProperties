@@ -4,11 +4,14 @@ namespace ManageProperties.API.DTOs.PropertyImages
 {
     public class UpdatePropertyImageDTO
     {
+        public Guid Id { get; set; }
         public Guid PropertyId { get; set; }
 
-        [Required]
-        [StringLength(50)]
-        public required string Image { get; set; }
+        //[Required]
+        //[StringLength(50)]
+        //public required string Image { get; set; }
+
+        public required IFormFile? CPhoto { get; set; }
 
         [Required]
         [StringLength(1)]

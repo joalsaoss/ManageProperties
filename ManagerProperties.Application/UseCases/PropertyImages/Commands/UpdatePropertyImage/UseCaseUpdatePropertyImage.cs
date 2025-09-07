@@ -2,11 +2,6 @@
 using ManagerProperties.Application.Contracts.Repositories;
 using ManagerProperties.Application.Exceptions;
 using ManagerProperties.Application.Utilities.Mediator;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ManagerProperties.Application.UseCases.PropertyImages.Commands.UpdatePropertyImage
 {
@@ -29,7 +24,14 @@ namespace ManagerProperties.Application.UseCases.PropertyImages.Commands.UpdateP
                 throw new NFoundException();
             }
 
-            propertyImage.Update(request.PropertyId, request.Image, request.Enable);
+            CancellationToken ct = default;
+            var ms = new MemoryStream();
+            await request.Bytes.CopyToAsync(ms, ct);
+
+            var ext = Path.GetExtension(request.PhotoFileName ?? "upload");
+            var key = $"owners/{request.PropertyId:D}/{DateTime.UtcNow:yyyyMMddHHmmss}_{Guid.NewGuid():N}{ext}";
+
+            propertyImage.Update(request.PropertyId, key, ms.ToArray(), request.ContentType, request.Enable);
             
             try
             {
@@ -41,8 +43,6 @@ namespace ManagerProperties.Application.UseCases.PropertyImages.Commands.UpdateP
                 await unitOfWork.RollBack();
                 throw;
             }
-
-
         }
     }
 }
