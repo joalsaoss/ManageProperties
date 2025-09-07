@@ -1,9 +1,10 @@
 ﻿using ManageProperties.Domain.Exceptions;
+using ManagerProperties.Domain.Commons;
 using System.Net.Mime;
 
 namespace ManageProperties.Domain.Entities
 {
-    public class PropertyImage
+    public class PropertyImage: AuditEntity
     {
         public Guid Id { get; private set; }
         public Guid PropertyId { get; private set; }

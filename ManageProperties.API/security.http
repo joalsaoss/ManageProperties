@@ -1,0 +1,21 @@
+@ManageProperties.API_HostAddress = https://localhost:7296
+
+###
+
+POST {{ManageProperties.API_HostAddress}}/register
+Content-Type: application/json
+
+{
+    "email": "joalsa@jrconsulting.com",
+    "password" : "aA123456!"
+}
+
+###
+
+POST {{ManageProperties.API_HostAddress}}/login
+Content-Type: application/json
+
+{
+    "email": "joalsa@jrconsulting.com",
+    "password" : "aA123456!"
+}

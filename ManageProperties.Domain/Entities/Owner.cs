@@ -1,9 +1,10 @@
 ﻿using ManageProperties.Domain.Common.Extensions;
 using ManageProperties.Domain.Exceptions;
+using ManagerProperties.Domain.Commons;
 
 namespace ManageProperties.Domain.Entities
 {
-    public class Owner
+    public class Owner: AuditEntity
     {
         public Guid Id { get; private set; }
         public string Name { get; private set; } = null!;

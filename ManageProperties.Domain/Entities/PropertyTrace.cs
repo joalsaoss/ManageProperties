@@ -1,9 +1,10 @@
 ﻿using ManageProperties.Domain.Common.Extensions;
 using ManageProperties.Domain.Exceptions;
+using ManagerProperties.Domain.Commons;
 
 namespace ManageProperties.Domain.Entities
 {
-    public class PropertyTrace
+    public class PropertyTrace: AuditEntity
     {
         public Guid Id { get; private set; }
         public Guid PropertyId { get; private set; }
