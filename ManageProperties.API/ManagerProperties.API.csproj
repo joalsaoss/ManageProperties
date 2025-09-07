@@ -15,8 +15,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ManageProperties.Persist\ManageProperties.Persist.csproj" />
+    <ProjectReference Include="..\ManageProperties.Persist\ManagerProperties.Persist.csproj" />
     <ProjectReference Include="..\ManagerProperties.Application\ManagerProperties.Application.csproj" />
+    <ProjectReference Include="..\ManagerProperties.Identity\ManagerProperties.Identity.csproj" />
   </ItemGroup>
 
 </Project>

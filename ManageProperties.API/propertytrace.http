@@ -1,4 +1,4 @@
-@ManageProperties.API_HostAddress = http://localhost:5080/api/propertytrace
+@ManageProperties.API_HostAddress = https://localhost:7296/api/propertytrace
 
 GET {{ManageProperties.API_HostAddress}}/01991c6c-1880-783b-8a0a-3c31dbc7c7fa  
 Accept: application/json
@@ -7,7 +7,7 @@ Accept: application/json
 
 GET {{ManageProperties.API_HostAddress}}   
 Accept: application/json
-
+Authorization : Bearer CfDJ8PsimWycmItNsI-2_pyzgnnjdK9j2OEpx2N10Ds9S7GSSavgoWpHvOycZehlQ9c1UYd4ubAzR6Cc36tFpNv1J9SaON0dK99FsNyFuxPBNEtupNBSAsb8nq3FB3xH04JgayzpIB6sAI5IGJwn8YGkBXkNmmdedFdPn1RNBvcss4rHc7kTNuxP5RDiXPv7I2aICyK-tAtZLwE-DxghbzYSEcdg6QFv2JJzJOavkMwOe-cER9QBD0mccaY61DymV6oGJ19Uabo4DIklRtYPmN8g2dnn37r5IyOLz9clQrGxOi53xhi_G3EyVjvQPWrMdm3tiiPnRCdum_Rstsn-ojEddTSd93xqPCsQ_-ha54OBwDeXzv4zumB3HAZf_3ZgcXsOTIIoB748lULZj05gOu_DmOUpekEFPhJU51OXSxX10HWAE9JuT7fluL2IMoHCEKc5mPFl3cDFwI4MIHTeaQsEWM_AEWlGdFrvrP8x-hnSb9frm04c12UCj_AAj83VcE_zlbHsrbye_waIaobSsCFFBsGbq__c748lpwlu2Up2NnPecbrfyyepQkjmAuwJjf-_UmeF8ogz6Kl42GiPCNY2JgMHMNNIEVbo-1UQRJHqsmR-fSiKJRjRfMG901b3z-MCBlJMEOyE-gmQPggwgxHZnTlZDDQi6_ti8SEIzSYHDxvpWl7IwO7dKMmcSzX1l09fLIVfl6pLPMmEKM1b6W0zOvQ7UojrXYuZ49_UJcTXtGqose7vALOAheKb3kVJ0jUsj
 ###
 
 POST {{ManageProperties.API_HostAddress}}
